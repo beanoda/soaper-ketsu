@@ -78,6 +78,7 @@
     let request = new ModuleRequest('', '', emptyKeyValue, null);
 
     const BASE_URL = 'https://soaper.tv/';
+    const NO_SUBTITLES_LINK = 'https://raw.githubusercontent.com/beanoda/soaper-ketsu/main/no_subtitles.srt';
     const url = parsedJson.request.url;
     const requestHeaders = [new KeyValue('x-requested-with', 'XMLHttpRequest'), new KeyValue('referer', url), new KeyValue('content-type', 'application/x-www-form-urlencoded; charset=UTF-8')];
     
@@ -103,10 +104,10 @@
                 var link = BASE_URL + sub.path;
                 link = new ModuleRequest(link, 'get', emptyKeyValue, null);
                 var subobj = new VideoSub(language, link);
-                console.log(JSON.stringify(subobj));
                 subs.push(subobj);
             }
         }
+        subs.push(new ModuleRequest(NO_SUBTITLES_LINK, 'get', emptyKeyValue, null));
         if (data.val) {
             output = {};
             let video_url = BASE_URL + data.val;
