@@ -99,6 +99,9 @@
         if (subtitles == undefined) {
             subtitles = '';
         } else {
+            let noSubsRequest = new ModuleRequest(NO_SUBTITLES_LINK, 'get', emptyKeyValue, null);
+            subs.push(new VideoSub('NoSubtitles', noSubsRequest));
+
             for (sub of subtitles) {
                 var language = sub.name;
                 var link = BASE_URL + sub.path;
